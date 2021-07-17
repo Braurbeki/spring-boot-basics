@@ -13,18 +13,20 @@ import java.util.Objects;
  * The provided unit tests will help you to understand the necessary changes in this class
  *
  */
-public class Student {
+public final class Student {
 
-    public Student() {
+    public Student(String firstName, String lastName) throws IllegalArgumentException {
+
+        if(firstName == null || firstName.isEmpty() || lastName== null || lastName.isEmpty())
+            throw new IllegalArgumentException("Name is empty");
+
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public Student(String firstName, String lastName) {
+    private final String firstName;
 
-    }
-
-    String firstName;
-
-    String lastName;
+    private final String lastName;
 
     public String getLastName() {
         return lastName;
@@ -34,13 +36,13 @@ public class Student {
         return firstName;
     }
 
-    public void setLastName(String lastName) {
+    /*public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
