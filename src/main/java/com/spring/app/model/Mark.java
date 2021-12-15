@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table
@@ -13,11 +14,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Data
-public class Grade {
+public class Mark {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long grade_id;
+    private Long mark_id;
     @Column
-    private String grade_name;
+    private int val;
+    @Column
+    private int student_id;
+    @Column
+    private int lesson_id;
+    @Column
+    private boolean attended;
+    @Column
+    private Date date;
 }

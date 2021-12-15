@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -15,4 +14,14 @@ import javax.persistence.Table;
 @Builder
 @Data
 public class Student {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long student_id;
+    @Column
+    private String name;
+    @Column
+    private int age;
+    @Column
+    private int grade_id;
 }

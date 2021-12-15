@@ -34,8 +34,14 @@ CREATE TABLE Mark (
     attended BOOLEAN,
     student_id INT,
     lesson_id INT,
+    date DATE,
     CONSTRAINT fk_student_id FOREIGN KEY(student_id) REFERENCES Student(student_id),
     CONSTRAINT fk_lesson_id FOREIGN KEY(lesson_id) REFERENCES Lesson(lesson_id)
+);
+
+CREATE TABLE Dates (
+    date_id SERIAL PRIMARY KEY,
+    lesson_date DATE
 );
 
 CREATE TABLE RESULT(
@@ -54,4 +60,10 @@ INSERT INTO Lesson (name, grade_id) VALUES ('Math', 1);
 INSERT INTO Lesson (name, grade_id) VALUES ('Russian', 1);
 INSERT INTO Lesson (name, grade_id) VALUES ('Ukrainian', 2);
 
-INSERT INTO Mark(val, attended, student_id, lesson_id) VALUES (3, true, 1, 1);
+INSERT INTO Mark(val, attended, student_id, lesson_id, date) VALUES (3, true, 1, 1, '10.12.2021');
+INSERT INTO Mark(val, attended, student_id, lesson_id, date) VALUES (4, true, 2, 3, '10.12.2021');
+INSERT INTO Mark(val, attended, student_id, lesson_id, date) VALUES (5, true, 3, 2, '10.12.2021');
+
+INSERT INTO Dates(lesson_date) VALUES ('10.12.2021');
+INSERT INTO Dates(lesson_date) VALUES ('2.12.2021');
+INSERT INTO Dates(lesson_date) VALUES ('3.12.2021');

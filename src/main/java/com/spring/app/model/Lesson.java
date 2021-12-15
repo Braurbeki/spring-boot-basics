@@ -13,11 +13,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Data
-public class Grade {
+public class Lesson {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long grade_id;
+    private Long lesson_id;
     @Column
-    private String grade_name;
+    private String name;
+    @Column
+    private int grade_id;
 }
