@@ -1,5 +1,12 @@
 # Spring Boot school API
 
+## Getting started
+### Prerequesties:
+- Docker
+### Build and execution:
+- `docker compose up`
+### Removing containers:
+- `docker compose down`
 ## Grade(class)
 * GET localhost:9090/grades
 ```json
