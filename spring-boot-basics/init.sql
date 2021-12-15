@@ -3,29 +3,50 @@ CREATE DATABASE manufacture;
 
 \c manufacture;
 
-CREATE TABLE Car (
-    car_id SERIAL PRIMARY KEY,
-    brand VARCHAR(100),
-    model VARCHAR(100),
-    UNIQUE (brand, model)
+
+CREATE TABLE Grade (
+    grade_id SERIAL PRIMARY KEY,
+    grade_name VARCHAR(100),
+    UNIQUE (grade_name)
 );
 
-CREATE TABLE Engineer (
-    engineer_id SERIAL PRIMARY KEY,
+INSERT INTO Grade (grade_name) VALUES ('1-A');
+INSERT INTO Grade (grade_name) VALUES ('1-B');
+
+CREATE TABLE Student (
+    student_id SERIAL PRIMARY KEY,
     name VARCHAR(100),
-    country CHAR(11),
-    car_id INT,
-    UNIQUE (name, country),
-    CONSTRAINT fk_car_id FOREIGN KEY(car_id) REFERENCES Car(car_id)
+    age INT,
+    CONSTRAINT fk_grade_id FOREIGN KEY(grade_id) REFERENCES Grade(grade_id)
 );
 
-INSERT INTO Car (brand, model) VALUES ('Mercedes', '124');
-INSERT INTO Car (brand, model) VALUES ('Toyota', 'Camry');
-INSERT INTO Car (brand, model) VALUES ('Audi', 'S4');
+CREATE TABLE Lesson (
+    lesson_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    CONSTRAINT fk_grade_id FOREIGN KEY(grade_id) REFERENCES Grade(grade_id)
+);
 
-INSERT INTO Engineer (name, country, car_id) VALUES('Tom Young', 'Japan', 2);
-INSERT INTO Engineer (name, country, car_id) VALUES('Brian Johnson', 'Germany', 1);
-INSERT INTO Engineer (name, country, car_id) VALUES('Mathew Carban', 'Germany' ,1);
-INSERT INTO Engineer (name, country, car_id) VALUES('Smart Win', 'Japan', 2);
-INSERT INTO Engineer (name, country, car_id) VALUES('Umaru Sulejah', 'Germany' ,1);
-INSERT INTO Engineer (name, country, car_id) VALUES('Jason Bethacker', 'Germany' ,3);
+CREATE TABLE Mark (
+    mark_id SERIAL PRIMARY KEY,
+    val INT,
+    attended BOOLEAN,
+    CONSTRAINT fk_student_id FOREIGN KEY(student_id) REFERENCES Student(student_id)
+    CONSTRAINT fk_lesson_id FOREIGN KEY(lesson_id) REFERENCES Lesson(lesson_id)
+);
+
+CREATE TABLE RESULT(
+    result_id SERIAL PRIMARY KEY,
+    skipped_lessons INT,
+    average_mark INT,
+    CONSTRAINT fk_student_id FOREIGN KEY(student_id) REFERENCES Student(student_id),
+);
+
+INSERT INTO Student (name, age, grade_id) VALUES ("Peter Parker", 11, 1);
+INSERT INTO Student (name, age, grade_id) VALUES ("Ilon Mask", 12, 2);
+INSERT INTO Student (name, age, grade_id) VALUES ("Robert De Niro", 10, 1);
+
+INSERT INTO Lesson (name, student_id) VALUES ("Math", 1);
+INSERT INTO Lesson (name, student_id) VALUES ("Russian", 1);
+INSERT INTO Lesson (name, student_id) VALUES ("Ukrainian", 2);
+
+INSERT INTO Mark(val, attended, student_id, lesson_id) VALUES (3, true, 1, 1);
