@@ -84,7 +84,7 @@ public final class MainController {
         return new ResponseEntity<>(studentService.getStudentMarks(student_id), HttpStatus.OK);
     }
 
-    @GetMapping("/grade/students/{grade_id}")
+    @GetMapping("/students/grade/{grade_id}")
     public ResponseEntity<String> getGradeStudents(@PathVariable Long grade_id) throws JsonProcessingException {
         return new ResponseEntity<>(gradeService.getAllStudents(grade_id), HttpStatus.OK);
     }
