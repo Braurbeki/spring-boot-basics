@@ -12,6 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 import java.util.Objects;
@@ -19,8 +22,8 @@ import java.util.Objects;
 @Configuration
 @ComponentScan("com.globallogic.training")
 @PropertySource("classpath:database.properties")
-@EnableTransactionManagement
-public class Config {
+@EnableWebMvc
+public class Config extends WebMvcConfigurerAdapter {
 
     @Bean
     ObjectMapper objectMapper() {
@@ -40,5 +43,10 @@ public class Config {
     @Bean
     PlatformTransactionManager transactionManager(Environment environment) {
         return new DataSourceTransactionManager(dataSource(environment));
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
     }
 }
