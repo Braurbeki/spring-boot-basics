@@ -20,7 +20,6 @@ import javax.sql.DataSource;
 import java.util.Objects;
 
 @Configuration
-@ComponentScan("com.globallogic.training")
 @PropertySource("classpath:database.properties")
 @EnableWebMvc
 public class Config extends WebMvcConfigurerAdapter {
