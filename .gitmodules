@@ -1,0 +1,3 @@
+[submodule "kursach-students"]
+	path = kursach-students
+	url = https://github.com/AnastasIkonostas/kursach-students.git
